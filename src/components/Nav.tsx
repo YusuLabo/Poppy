@@ -11,7 +11,7 @@ export function Nav() {
   return (
     <nav className="sticky top-4 z-30 flex flex-wrap items-center gap-2 rounded-[28px] border border-white/90 bg-white/75 p-2.5 shadow-[0_16px_50px_rgba(86,63,52,0.10)] backdrop-blur-xl">
       <Link href="/" className="flex items-center gap-2 rounded-2xl px-2 py-1.5 transition hover:bg-orange-50">
-        <span className="grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-orange-400 to-rose-500 text-xl text-white shadow-[0_8px_20px_rgba(244,104,81,0.28)]">
+        <span className="grid size-10 place-items-center rounded-2xl bg-linear-to-br from-orange-400 to-rose-500 text-xl text-white shadow-[0_8px_20px_rgba(244,104,81,0.28)]">
           🐾
         </span>
         <span className="hidden sm:block">
