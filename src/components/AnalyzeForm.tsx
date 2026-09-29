@@ -75,7 +75,7 @@ export function AnalyzeForm() {
         className="h-fit space-y-5 rounded-[32px] border border-white/90 bg-white/80 p-5 shadow-[0_18px_55px_rgba(86,63,52,0.09)] backdrop-blur-xl lg:sticky lg:top-28"
       >
         <div className="flex items-start gap-3">
-          <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-orange-100 to-rose-100 text-xl">
+          <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-orange-100 to-rose-100 text-xl">
             📷
           </div>
           <div>
@@ -150,7 +150,7 @@ export function AnalyzeForm() {
 
         <button
           disabled={loading}
-          className="w-full rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 p-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(244,103,81,0.28)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-50"
+          className="w-full rounded-2xl bg-linear-to-r from-orange-500 to-rose-500 p-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(244,103,81,0.28)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-50"
         >
           {loading ? "행동 신호 살펴보는 중..." : "✦ 분석하기"}
         </button>
@@ -167,7 +167,7 @@ export function AnalyzeForm() {
           <div className="relative min-h-[480px] overflow-hidden rounded-[32px] border border-white/90 bg-white/70 p-7 shadow-[0_18px_55px_rgba(86,63,52,0.08)] backdrop-blur-xl md:p-10">
             <div className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-violet-100 blur-3xl" />
             <div className="relative flex min-h-[400px] flex-col items-center justify-center text-center">
-              <div className="grid size-20 place-items-center rounded-[28px] bg-gradient-to-br from-orange-100 via-rose-50 to-violet-100 text-4xl shadow-inner">
+              <div className="grid size-20 place-items-center rounded-[28px] bg-linear-to-br from-orange-100 via-rose-50 to-violet-100 text-4xl shadow-inner">
                 🐶
               </div>
               <h2 className="mt-5 text-xl font-black tracking-tight text-stone-800">어떤 신호를 보내고 있을까요?</h2>
@@ -184,7 +184,7 @@ export function AnalyzeForm() {
           </div>
         ) : (
           <article className="space-y-5 rounded-[32px] border border-white/90 bg-white/80 p-5 shadow-[0_18px_55px_rgba(86,63,52,0.09)] backdrop-blur-xl md:p-7">
-            <section className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-orange-100 via-rose-50 to-violet-100 p-6">
+            <section className="relative overflow-hidden rounded-[28px] bg-linear-to-br from-orange-100 via-rose-50 to-violet-100 p-6">
               <div className="pointer-events-none absolute -right-10 -top-12 size-40 rounded-full bg-white/50 blur-2xl" />
               <div className="relative">
                 <p className="text-xs font-black uppercase tracking-[0.16em] text-orange-600/70">Poppy says</p>
@@ -235,7 +235,7 @@ export function AnalyzeForm() {
               </ResultSection>
             )}
 
-            <section className="rounded-[24px] bg-gradient-to-br from-emerald-50 to-cyan-50 p-5">
+            <section className="rounded-[24px] bg-linear-to-br from-emerald-50 to-cyan-50 p-5">
               <div className="flex gap-3">
                 <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-white text-lg shadow-sm">💡</span>
                 <div>
