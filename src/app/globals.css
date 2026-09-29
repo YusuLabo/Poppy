@@ -2,12 +2,14 @@
 
 :root {
   color-scheme: light;
-  --ink: #29221f;
-  --muted: #7d716b;
-  --cream: #fffaf4;
-  --coral: #ff725e;
-  --coral-deep: #ef5a46;
-  --lavender: #7467d7;
+  --page-start: #667eea;
+  --page-mid: #6b63d9;
+  --page-end: #7b4ca5;
+  --ink: #273247;
+  --muted: #718096;
+  --line: #e5eaf2;
+  --primary: #6377e8;
+  --primary-hover: #5568d7;
 }
 
 * {
@@ -16,18 +18,15 @@
 
 html {
   min-width: 320px;
-  background: var(--cream);
+  background: var(--page-mid);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   color: var(--ink);
-  font-family: "Pretendard", "SUIT", "Noto Sans KR", "Apple SD Gothic Neo", Arial, Helvetica, sans-serif;
-  background:
-    radial-gradient(circle at 8% -8%, rgba(255, 190, 128, 0.42), transparent 31rem),
-    radial-gradient(circle at 92% 2%, rgba(169, 153, 255, 0.3), transparent 28rem),
-    linear-gradient(180deg, #fffaf4 0%, #fffdf9 46%, #f8f3ff 100%);
+  font-family: Inter, Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, var(--page-start) 0%, var(--page-mid) 52%, var(--page-end) 100%);
   background-attachment: fixed;
 }
 
@@ -48,23 +47,18 @@ select,
 textarea {
   color: var(--ink);
   outline: none;
-  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: rgba(255, 114, 94, 0.8);
-  box-shadow: 0 0 0 4px rgba(255, 114, 94, 0.12);
+  border-color: #8797f0;
+  box-shadow: 0 0 0 3px rgba(99, 119, 232, 0.14);
 }
 
 textarea {
   resize: vertical;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
 }
 
 button {
@@ -76,23 +70,6 @@ button:disabled {
 }
 
 ::selection {
-  color: #33231f;
-  background: #ffd5c8;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .poppy-float {
-    animation: poppy-float 5.2s ease-in-out infinite;
-  }
-
-  @keyframes poppy-float {
-    0%,
-    100% {
-      transform: translateY(0) rotate(-2deg);
-    }
-
-    50% {
-      transform: translateY(-8px) rotate(2deg);
-    }
-  }
+  color: #1f2a44;
+  background: #dfe4ff;
 }
