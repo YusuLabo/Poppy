@@ -5,9 +5,9 @@ export default async function MainLayout({ children }: { children: React.ReactNo
   await requireUser();
 
   return (
-    <main className="relative mx-auto min-h-screen max-w-6xl px-4 pb-16 pt-4 md:px-8 md:pt-7">
+    <main className="mx-auto min-h-screen max-w-7xl px-4 py-4 md:px-6 md:py-6">
       <Nav />
-      <div className="mt-7 md:mt-9">{children}</div>
+      <div className="mt-6">{children}</div>
     </main>
   );
 }
