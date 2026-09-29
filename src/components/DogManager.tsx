@@ -97,7 +97,7 @@ export function DogManager() {
         className="h-fit space-y-4 rounded-[32px] border border-white/90 bg-white/80 p-5 shadow-[0_18px_55px_rgba(86,63,52,0.09)] backdrop-blur-xl lg:sticky lg:top-28"
       >
         <div className="flex items-start gap-3">
-          <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-violet-100 to-fuchsia-100 text-xl">
+          <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-violet-100 to-fuchsia-100 text-xl">
             🐕
           </div>
           <div>
@@ -187,7 +187,7 @@ export function DogManager() {
           </p>
         )}
 
-        <button className="w-full rounded-2xl bg-gradient-to-r from-violet-500 to-fuchsia-500 p-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(118,91,205,0.24)] transition hover:-translate-y-0.5">
+        <button className="w-full rounded-2xl bg-linear-to-r from-violet-500 to-fuchsia-500 p-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(118,91,205,0.24)] transition hover:-translate-y-0.5">
           ＋ 등록하기
         </button>
       </form>
@@ -195,7 +195,7 @@ export function DogManager() {
       <div className="space-y-4">
         {dogs.length === 0 && (
           <div className="flex min-h-[360px] flex-col items-center justify-center rounded-[32px] border border-white/90 bg-white/70 p-8 text-center shadow-[0_18px_55px_rgba(86,63,52,0.08)] backdrop-blur-xl">
-            <div className="grid size-20 place-items-center rounded-[28px] bg-gradient-to-br from-violet-100 to-orange-100 text-4xl">
+            <div className="grid size-20 place-items-center rounded-[28px] bg-linear-to-br from-violet-100 to-orange-100 text-4xl">
               🐾
             </div>
             <h3 className="mt-5 text-xl font-black text-stone-800">아직 등록된 강아지가 없어요</h3>
@@ -210,7 +210,7 @@ export function DogManager() {
             key={dog.id}
             className="overflow-hidden rounded-[32px] border border-white/90 bg-white/80 shadow-[0_18px_55px_rgba(86,63,52,0.08)] backdrop-blur-xl"
           >
-            <div className="flex flex-wrap items-center justify-between gap-3 bg-gradient-to-r from-violet-50 via-white to-orange-50 p-5 md:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-3 bg-linear-to-r from-violet-50 via-white to-orange-50 p-5 md:p-6">
               <div className="flex items-center gap-4">
                 <div className="grid size-14 place-items-center rounded-[22px] bg-white text-3xl shadow-sm">
                   {index % 3 === 0 ? "🐶" : index % 3 === 1 ? "🐕" : "🐾"}
