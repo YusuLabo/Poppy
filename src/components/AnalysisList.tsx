@@ -1,0 +1,5 @@
+"use client";
+import { useEffect, useState } from "react";
+
+type Row = { id:string; createdAt:string; feedback:string|null; dog:{name:string}|null; result:{ state?:{emotion?:string;desire?:string}; dogSpeech?:string } };
+export function AnalysisList(){ const [rows,setRows]=useState<Row[]>([]); useEffect(()=>{fetch("/api/analyses").then(r=>r.ok?r.json():[]).then(setRows)},[]); return <div className="space-y-3">{rows.length===0&&<div className="rounded-3xl bg-white p-6">아직 분석 기록이 없습니다.</div>}{rows.map(r=><div key={r.id} className="rounded-2xl bg-white p-5 shadow-sm"><div className="flex justify-between gap-4"><div><p className="text-sm text-neutral-500">{r.dog?.name??"등록되지 않은 강아지"}</p><p className="font-bold">{r.result?.state?.emotion??"분석 결과"} · {r.result?.state?.desire??""}</p><p className="mt-1 text-sm">{r.result?.dogSpeech}</p></div><div className="text-right text-xs text-neutral-500">{new Date(r.createdAt).toLocaleString("ko-KR")}<br/>{r.feedback??"피드백 없음"}</div></div></div>)}</div>; }

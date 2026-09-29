@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+enum DogSex {
+  MALE
+  FEMALE
+  UNKNOWN
+}
+
+enum NeuteredStatus {
+  YES
+  NO
+  UNKNOWN
+}
+
+enum TraitSource {
+  PRESET
+  USER
+  AI_CONFIRMED
+}
+
+enum MediaType {
+  IMAGE
+  VIDEO
+}
+
+enum AnalysisFeedback {
+  MATCH
+  NOT_MATCH
+}
+
+model User {
+  id           String     @id @default(cuid())
+  username     String     @unique
+  passwordHash String
+  dogs         Dog[]
+  sessions     Session[]
+  analyses     Analysis[]
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model Dog {
+  id          String          @id @default(cuid())
+  userId      String
+  user        User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String
+  birthDate   DateTime?
+  breedKey    String?
+  sex         DogSex          @default(UNKNOWN)
+  neutered    NeuteredStatus  @default(UNKNOWN)
+  personality String?
+  traits      DogTrait[]
+  analyses    Analysis[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  @@index([userId])
+}
+
+model DogTrait {
+  id               String      @id @default(cuid())
+  dogId            String
+  dog              Dog         @relation(fields: [dogId], references: [id], onDelete: Cascade)
+  text             String
+  source           TraitSource
+  sourceAnalysisId String?
+  createdAt        DateTime    @default(now())
+
+  @@index([dogId])
+}
+
+model Analysis {
+  id               String            @id @default(cuid())
+  userId           String
+  user             User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dogId            String?
+  dog              Dog?              @relation(fields: [dogId], references: [id], onDelete: SetNull)
+  mediaType        MediaType
+  situationType    String?
+  situationText    String?
+  result           Json
+  contextSnapshot  Json
+  knowledgeVersion String
+  model            String
+  feedback         AnalysisFeedback?
+  createdAt        DateTime          @default(now())
+
+  @@index([userId, createdAt])
+  @@index([dogId, createdAt])
+}
