@@ -30,7 +30,7 @@ export function AnalysisList() {
   if (rows.length === 0) {
     return (
       <div className="flex min-h-[380px] flex-col items-center justify-center rounded-[32px] border border-white/90 bg-white/70 p-8 text-center shadow-[0_18px_55px_rgba(86,63,52,0.08)] backdrop-blur-xl">
-        <div className="grid size-20 place-items-center rounded-[28px] bg-gradient-to-br from-emerald-100 to-cyan-100 text-4xl">
+        <div className="grid size-20 place-items-center rounded-[28px] bg-linear-to-br from-emerald-100 to-cyan-100 text-4xl">
           📚
         </div>
         <h2 className="mt-5 text-xl font-black text-stone-800">아직 분석 기록이 없어요</h2>
@@ -53,7 +53,7 @@ export function AnalysisList() {
             key={row.id}
             className="group overflow-hidden rounded-[30px] border border-white/90 bg-white/80 shadow-[0_16px_48px_rgba(86,63,52,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:shadow-[0_20px_55px_rgba(86,63,52,0.12)]"
           >
-            <div className="flex items-center justify-between gap-3 border-b border-stone-100 bg-gradient-to-r from-emerald-50/80 via-white to-violet-50/70 px-5 py-4">
+            <div className="flex items-center justify-between gap-3 border-b border-stone-100 bg-linear-to-r from-emerald-50/80 via-white to-violet-50/70 px-5 py-4">
               <div className="flex items-center gap-3">
                 <span className="grid size-10 place-items-center rounded-2xl bg-white text-xl shadow-sm">🐶</span>
                 <div>
