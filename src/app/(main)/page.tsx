@@ -38,7 +38,7 @@ export default function HomePage() {
             <h1 className="mt-6 max-w-3xl text-4xl font-black leading-[1.12] tracking-[-0.04em] text-stone-900 sm:text-5xl lg:text-[3.65rem]">
               말은 못 해도,
               <br />
-              <span className="bg-gradient-to-r from-orange-500 via-rose-500 to-violet-600 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-orange-500 via-rose-500 to-violet-600 bg-clip-text text-transparent">
                 표정은 말하고 있어요.
               </span>
             </h1>
@@ -51,7 +51,7 @@ export default function HomePage() {
             <div className="mt-7 flex flex-wrap gap-3">
               <Link
                 href="/analyze"
-                className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 px-5 py-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(244,103,81,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(244,103,81,0.34)]"
+                className="group inline-flex items-center gap-2 rounded-2xl bg-linear-to-r from-orange-500 to-rose-500 px-5 py-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(244,103,81,0.28)] transition hover:-translate-y-0.5 hover:shadow-[0_16px_34px_rgba(244,103,81,0.34)]"
               >
                 분석 시작하기
                 <span className="transition group-hover:translate-x-0.5">→</span>
@@ -72,7 +72,7 @@ export default function HomePage() {
           </div>
 
           <div className="relative mx-auto w-full max-w-md">
-            <div className="poppy-float relative rounded-[36px] border border-white bg-gradient-to-br from-[#fff7ef] via-white to-[#f4efff] p-5 shadow-[0_28px_70px_rgba(87,65,54,0.16)]">
+            <div className="poppy-float relative rounded-[36px] border border-white bg-linear-to-br from-[#fff7ef] via-white to-[#f4efff] p-5 shadow-[0_28px_70px_rgba(87,65,54,0.16)]">
               <div className="flex items-center justify-between">
                 <span className="rounded-full bg-white px-3 py-1.5 text-[11px] font-black text-stone-500 shadow-sm">
                   TODAY&apos;S SIGNAL
@@ -81,7 +81,7 @@ export default function HomePage() {
               </div>
 
               <div className="mt-7 flex items-center gap-4">
-                <div className="grid size-20 shrink-0 place-items-center rounded-[28px] bg-gradient-to-br from-orange-100 to-rose-100 text-5xl shadow-inner">
+                <div className="grid size-20 shrink-0 place-items-center rounded-[28px] bg-linear-to-br from-orange-100 to-rose-100 text-5xl shadow-inner">
                   🐕
                 </div>
                 <div>
@@ -125,7 +125,7 @@ export default function HomePage() {
         {features.map((feature) => (
           <article
             key={feature.title}
-            className={"rounded-[28px] border border-white/80 bg-gradient-to-br " + feature.tone + " p-5 shadow-[0_14px_40px_rgba(86,63,52,0.07)]"}
+            className={"rounded-[28px] border border-white/80 bg-linear-to-br " + feature.tone + " p-5 shadow-[0_14px_40px_rgba(86,63,52,0.07)]"}
           >
             <div className="grid size-11 place-items-center rounded-2xl bg-white text-xl shadow-sm">{feature.icon}</div>
             <h2 className="mt-4 text-base font-black text-stone-800">{feature.title}</h2>
