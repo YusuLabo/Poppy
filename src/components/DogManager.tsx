@@ -27,15 +27,15 @@ const breedLabel: Record<string, string> = {
 };
 
 const sexLabel: Record<string, string> = {
-  UNKNOWN: "성별 미입력",
+  UNKNOWN: "미입력",
   MALE: "수컷",
   FEMALE: "암컷",
 };
 
 const neuteredLabel: Record<string, string> = {
-  UNKNOWN: "중성화 미입력",
-  YES: "중성화 O",
-  NO: "중성화 X",
+  UNKNOWN: "미입력",
+  YES: "완료",
+  NO: "안 함",
 };
 
 export function DogManager() {
@@ -91,214 +91,197 @@ export function DogManager() {
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[360px_1fr]">
-      <form
-        onSubmit={addDog}
-        className="h-fit space-y-4 rounded-[32px] border border-white/90 bg-white/80 p-5 shadow-[0_18px_55px_rgba(86,63,52,0.09)] backdrop-blur-xl lg:sticky lg:top-28"
-      >
-        <div className="flex items-start gap-3">
-          <div className="grid size-11 shrink-0 place-items-center rounded-2xl bg-linear-to-br from-violet-100 to-fuchsia-100 text-xl">
-            🐕
+    <div className="grid gap-5 lg:grid-cols-[340px_1fr]">
+      <form onSubmit={addDog} className="h-fit rounded-xl bg-white shadow-sm">
+        <div className="border-b border-slate-200 px-5 py-4">
+          <h2 className="text-base font-bold text-slate-800">강아지 등록</h2>
+          <p className="mt-1 text-xs text-slate-500">기본 프로필을 추가합니다.</p>
+        </div>
+
+        <div className="space-y-4 p-5">
+          <label className="block">
+            <span className="mb-2 block text-sm font-semibold text-slate-700">이름</span>
+            <input
+              required
+              name="name"
+              placeholder="이름"
+              className="w-full rounded-lg border border-slate-200 px-3 py-3 text-sm"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-sm font-semibold text-slate-700">생년월일</span>
+            <input
+              name="birthDate"
+              type="date"
+              className="w-full rounded-lg border border-slate-200 px-3 py-3 text-sm"
+            />
+          </label>
+
+          <label className="block">
+            <span className="mb-2 block text-sm font-semibold text-slate-700">견종</span>
+            <select
+              name="breedKey"
+              className="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm"
+            >
+              <option value="">선택 안 함</option>
+              <option value="pomeranian">포메라니안</option>
+              <option value="golden-retriever">골든 리트리버</option>
+              <option value="poodle">푸들</option>
+            </select>
+          </label>
+
+          <div className="grid grid-cols-2 gap-3">
+            <label>
+              <span className="mb-2 block text-sm font-semibold text-slate-700">성별</span>
+              <select
+                name="sex"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm"
+              >
+                <option value="UNKNOWN">미입력</option>
+                <option value="MALE">수컷</option>
+                <option value="FEMALE">암컷</option>
+              </select>
+            </label>
+
+            <label>
+              <span className="mb-2 block text-sm font-semibold text-slate-700">중성화</span>
+              <select
+                name="neutered"
+                className="w-full rounded-lg border border-slate-200 bg-white px-3 py-3 text-sm"
+              >
+                <option value="UNKNOWN">미입력</option>
+                <option value="YES">완료</option>
+                <option value="NO">안 함</option>
+              </select>
+            </label>
           </div>
-          <div>
-            <h2 className="font-black text-stone-800">강아지 등록</h2>
-            <p className="mt-1 text-xs font-medium leading-5 text-stone-400">
-              기본 정보와 평소 성격을 알려주세요.
+
+          <label className="block">
+            <span className="mb-2 block text-sm font-semibold text-slate-700">평소 성격</span>
+            <textarea
+              name="personality"
+              maxLength={500}
+              rows={4}
+              placeholder="평소 성격이나 행동 특징"
+              className="w-full rounded-lg border border-slate-200 px-3 py-3 text-sm leading-6"
+            />
+          </label>
+
+          {error && (
+            <p className="rounded-lg bg-red-50 px-3.5 py-3 text-sm font-medium text-red-600">
+              {error}
             </p>
-          </div>
+          )}
+
+          <button className="w-full rounded-lg bg-[#6377e8] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#5568d7]">
+            등록
+          </button>
         </div>
-
-        <label className="block">
-          <span className="mb-2 block text-xs font-black text-stone-700">이름</span>
-          <input
-            required
-            name="name"
-            placeholder="예: 뽀삐"
-            className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3.5 text-sm font-semibold shadow-sm"
-          />
-        </label>
-
-        <label className="block">
-          <span className="mb-2 block text-xs font-black text-stone-700">
-            생년월일 <span className="font-bold text-stone-300">선택</span>
-          </span>
-          <input
-            name="birthDate"
-            type="date"
-            className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3.5 text-sm font-semibold shadow-sm"
-          />
-        </label>
-
-        <label className="block">
-          <span className="mb-2 block text-xs font-black text-stone-700">견종</span>
-          <select
-            name="breedKey"
-            className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3.5 text-sm font-semibold shadow-sm"
-          >
-            <option value="">견종 선택 안 함</option>
-            <option value="pomeranian">포메라니안</option>
-            <option value="golden-retriever">골든 리트리버</option>
-            <option value="poodle">푸들</option>
-          </select>
-        </label>
-
-        <div className="grid grid-cols-2 gap-2">
-          <label>
-            <span className="mb-2 block text-xs font-black text-stone-700">성별</span>
-            <select
-              name="sex"
-              className="w-full rounded-2xl border border-stone-200 bg-white px-3 py-3.5 text-sm font-semibold shadow-sm"
-            >
-              <option value="UNKNOWN">미입력</option>
-              <option value="MALE">수컷</option>
-              <option value="FEMALE">암컷</option>
-            </select>
-          </label>
-
-          <label>
-            <span className="mb-2 block text-xs font-black text-stone-700">중성화</span>
-            <select
-              name="neutered"
-              className="w-full rounded-2xl border border-stone-200 bg-white px-3 py-3.5 text-sm font-semibold shadow-sm"
-            >
-              <option value="UNKNOWN">미입력</option>
-              <option value="YES">O</option>
-              <option value="NO">X</option>
-            </select>
-          </label>
-        </div>
-
-        <label className="block">
-          <span className="mb-2 block text-xs font-black text-stone-700">
-            평소 성격 <span className="font-bold text-stone-300">선택</span>
-          </span>
-          <textarea
-            name="personality"
-            maxLength={500}
-            rows={3}
-            placeholder="예: 집에서는 차분하지만 산책만 나가면 아주 신나요."
-            className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3.5 text-sm font-medium leading-6 shadow-sm"
-          />
-        </label>
-
-        {error && (
-          <p className="rounded-2xl border border-rose-100 bg-rose-50 px-4 py-3 text-sm font-bold text-rose-600">
-            {error}
-          </p>
-        )}
-
-        <button className="w-full rounded-2xl bg-linear-to-r from-violet-500 to-fuchsia-500 p-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(118,91,205,0.24)] transition hover:-translate-y-0.5">
-          ＋ 등록하기
-        </button>
       </form>
 
-      <div className="space-y-4">
-        {dogs.length === 0 && (
-          <div className="flex min-h-[360px] flex-col items-center justify-center rounded-[32px] border border-white/90 bg-white/70 p-8 text-center shadow-[0_18px_55px_rgba(86,63,52,0.08)] backdrop-blur-xl">
-            <div className="grid size-20 place-items-center rounded-[28px] bg-linear-to-br from-violet-100 to-orange-100 text-4xl">
-              🐾
-            </div>
-            <h3 className="mt-5 text-xl font-black text-stone-800">아직 등록된 강아지가 없어요</h3>
-            <p className="mt-2 max-w-sm text-sm font-medium leading-6 text-stone-400">
-              왼쪽 폼에서 첫 강아지를 등록해보세요. 평소 특징은 나중에 조금씩 추가해도 괜찮아요.
-            </p>
+      <div className="overflow-hidden rounded-xl bg-white shadow-sm">
+        <div className="flex items-center justify-between gap-3 border-b border-slate-200 px-5 py-4">
+          <div>
+            <h2 className="text-base font-bold text-slate-800">강아지 관리</h2>
+            <p className="mt-1 text-xs text-slate-500">등록된 프로필과 특징을 관리합니다.</p>
+          </div>
+          <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+            {dogs.length}마리
+          </span>
+        </div>
+
+        {dogs.length === 0 ? (
+          <div className="p-10 text-center">
+            <p className="text-sm font-semibold text-slate-700">등록된 강아지가 없습니다.</p>
+            <p className="mt-1 text-sm text-slate-400">왼쪽에서 첫 프로필을 등록하세요.</p>
+          </div>
+        ) : (
+          <div className="divide-y divide-slate-200">
+            {dogs.map((dog) => (
+              <article key={dog.id} className="p-5">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-base font-bold text-slate-800">{dog.name}</h3>
+                    <div className="mt-2 flex flex-wrap gap-2 text-xs">
+                      <span className="rounded-full bg-blue-100 px-2.5 py-1 font-semibold text-blue-700">
+                        {dog.breedKey ? breedLabel[dog.breedKey] ?? dog.breedKey : "견종 미입력"}
+                      </span>
+                      <span className="rounded-full bg-emerald-100 px-2.5 py-1 font-semibold text-emerald-700">
+                        {sexLabel[dog.sex] ?? dog.sex}
+                      </span>
+                      <span className="rounded-full bg-slate-100 px-2.5 py-1 font-semibold text-slate-600">
+                        중성화 {neuteredLabel[dog.neutered] ?? dog.neutered}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className="text-xs font-medium text-slate-400">특징 {dog.traits.length}개</span>
+                </div>
+
+                {dog.personality && (
+                  <p className="mt-4 rounded-lg bg-slate-50 px-3.5 py-3 text-sm leading-6 text-slate-600">
+                    {dog.personality}
+                  </p>
+                )}
+
+                <div className="mt-4">
+                  <p className="text-xs font-semibold text-slate-500">저장된 특징</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {dog.traits.length === 0 && (
+                      <span className="text-xs text-slate-400">저장된 특징 없음</span>
+                    )}
+                    {dog.traits.map((trait) => (
+                      <span
+                        key={trait.id}
+                        className="rounded-full bg-violet-100 px-2.5 py-1 text-xs font-semibold text-violet-700"
+                      >
+                        {trait.text}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-4 border-t border-slate-100 pt-4">
+                  <p className="text-xs font-semibold text-slate-500">빠른 특징 추가</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {PRESETS.filter((preset) => !dog.traits.some((trait) => trait.text === preset)).map((preset) => (
+                      <button
+                        key={preset}
+                        type="button"
+                        onClick={() => addTrait(dog.id, preset, "PRESET")}
+                        className="rounded-md border border-slate-200 bg-white px-2.5 py-1.5 text-xs font-medium text-slate-600 transition hover:bg-slate-50"
+                      >
+                        + {preset}
+                      </button>
+                    ))}
+                  </div>
+
+                  <form
+                    className="mt-3 flex gap-2"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      const form = e.currentTarget;
+                      const data = new FormData(form);
+                      await addTrait(dog.id, String(data.get("trait") ?? ""));
+                      form.reset();
+                    }}
+                  >
+                    <input
+                      name="trait"
+                      maxLength={200}
+                      placeholder="직접 특징 입력"
+                      className="min-w-0 flex-1 rounded-lg border border-slate-200 px-3 py-2.5 text-sm"
+                    />
+                    <button className="rounded-lg bg-emerald-500 px-4 text-xs font-semibold text-white">
+                      추가
+                    </button>
+                  </form>
+                </div>
+              </article>
+            ))}
           </div>
         )}
-
-        {dogs.map((dog, index) => (
-          <article
-            key={dog.id}
-            className="overflow-hidden rounded-[32px] border border-white/90 bg-white/80 shadow-[0_18px_55px_rgba(86,63,52,0.08)] backdrop-blur-xl"
-          >
-            <div className="flex flex-wrap items-center justify-between gap-3 bg-linear-to-r from-violet-50 via-white to-orange-50 p-5 md:p-6">
-              <div className="flex items-center gap-4">
-                <div className="grid size-14 place-items-center rounded-[22px] bg-white text-3xl shadow-sm">
-                  {index % 3 === 0 ? "🐶" : index % 3 === 1 ? "🐕" : "🐾"}
-                </div>
-                <div>
-                  <h3 className="text-xl font-black tracking-tight text-stone-900">{dog.name}</h3>
-                  <p className="mt-1 text-xs font-bold text-stone-400">
-                    {dog.breedKey ? breedLabel[dog.breedKey] ?? dog.breedKey : "견종 미입력"}
-                    {" · "}
-                    {sexLabel[dog.sex] ?? dog.sex}
-                    {" · "}
-                    {neuteredLabel[dog.neutered] ?? dog.neutered}
-                  </p>
-                </div>
-              </div>
-              <span className="rounded-full bg-white px-3 py-1.5 text-[10px] font-black uppercase tracking-wider text-violet-500 shadow-sm">
-                profile
-              </span>
-            </div>
-
-            <div className="p-5 md:p-6">
-              {dog.personality && (
-                <div className="rounded-2xl bg-stone-50 p-4">
-                  <p className="text-[10px] font-black uppercase tracking-wider text-stone-400">평소 성격</p>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-stone-600">{dog.personality}</p>
-                </div>
-              )}
-
-              <div className="mt-5">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs font-black text-stone-700">저장된 특징</p>
-                  <span className="text-[10px] font-bold text-stone-300">{dog.traits.length}개</span>
-                </div>
-
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {dog.traits.length === 0 && (
-                    <span className="text-xs font-medium text-stone-400">아직 저장된 특징이 없어요.</span>
-                  )}
-                  {dog.traits.map((trait) => (
-                    <span
-                      key={trait.id}
-                      className="rounded-full border border-violet-100 bg-violet-50 px-3 py-1.5 text-xs font-bold text-violet-700"
-                    >
-                      {trait.text}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="mt-5 border-t border-stone-100 pt-5">
-                <p className="text-xs font-black text-stone-700">빠른 특징 추가</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {PRESETS.filter((preset) => !dog.traits.some((trait) => trait.text === preset)).map((preset) => (
-                    <button
-                      key={preset}
-                      type="button"
-                      onClick={() => addTrait(dog.id, preset, "PRESET")}
-                      className="rounded-full border border-stone-200 bg-white px-3 py-1.5 text-xs font-bold text-stone-500 transition hover:border-violet-200 hover:bg-violet-50 hover:text-violet-700"
-                    >
-                      + {preset}
-                    </button>
-                  ))}
-                </div>
-
-                <form
-                  className="mt-3 flex gap-2"
-                  onSubmit={async (e) => {
-                    e.preventDefault();
-                    const form = e.currentTarget;
-                    const data = new FormData(form);
-                    await addTrait(dog.id, String(data.get("trait") ?? ""));
-                    form.reset();
-                  }}
-                >
-                  <input
-                    name="trait"
-                    maxLength={200}
-                    placeholder="직접 특징 입력"
-                    className="min-w-0 flex-1 rounded-2xl border border-stone-200 bg-white px-4 py-2.5 text-sm font-medium shadow-sm"
-                  />
-                  <button className="rounded-2xl bg-stone-900 px-4 text-xs font-black text-white transition hover:bg-violet-700">
-                    추가
-                  </button>
-                </form>
-              </div>
-            </div>
-          </article>
-        ))}
       </div>
     </div>
   );
