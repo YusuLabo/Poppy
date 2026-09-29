@@ -14,8 +14,13 @@ type Row = {
 };
 
 const feedbackLabel: Record<string, string> = {
-  MATCH: "👍 잘 맞았어요",
-  NOT_MATCH: "🤔 달랐어요",
+  MATCH: "맞음",
+  NOT_MATCH: "다름",
+};
+
+const feedbackTone: Record<string, string> = {
+  MATCH: "bg-emerald-100 text-emerald-700",
+  NOT_MATCH: "bg-red-100 text-red-700",
 };
 
 export function AnalysisList() {
@@ -29,69 +34,81 @@ export function AnalysisList() {
 
   if (rows.length === 0) {
     return (
-      <div className="flex min-h-[380px] flex-col items-center justify-center rounded-[32px] border border-white/90 bg-white/70 p-8 text-center shadow-[0_18px_55px_rgba(86,63,52,0.08)] backdrop-blur-xl">
-        <div className="grid size-20 place-items-center rounded-[28px] bg-linear-to-br from-emerald-100 to-cyan-100 text-4xl">
-          📚
-        </div>
-        <h2 className="mt-5 text-xl font-black text-stone-800">아직 분석 기록이 없어요</h2>
-        <p className="mt-2 max-w-sm text-sm font-medium leading-6 text-stone-400">
-          첫 사진이나 영상을 분석하면 강아지의 상태와 한마디가 여기에 차곡차곡 쌓입니다.
-        </p>
+      <div className="rounded-xl bg-white p-10 text-center shadow-sm">
+        <p className="text-sm font-semibold text-slate-700">아직 분석 기록이 없습니다.</p>
+        <p className="mt-1 text-sm text-slate-400">첫 분석을 완료하면 이곳에 기록이 표시됩니다.</p>
       </div>
     );
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {rows.map((row) => {
-        const emotion = row.result?.state?.emotion ?? "분석 결과";
-        const desire = row.result?.state?.desire;
-        const feedback = row.feedback ? feedbackLabel[row.feedback] ?? row.feedback : "피드백 없음";
+    <div className="overflow-hidden rounded-xl bg-white shadow-sm">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 px-5 py-4">
+        <div>
+          <h2 className="text-base font-bold text-slate-800">분석 이력</h2>
+          <p className="mt-1 text-xs text-slate-500">최근 분석 결과와 사용자 피드백입니다.</p>
+        </div>
+        <span className="rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+          총 {rows.length}건
+        </span>
+      </div>
 
-        return (
-          <article
-            key={row.id}
-            className="group overflow-hidden rounded-[30px] border border-white/90 bg-white/80 shadow-[0_16px_48px_rgba(86,63,52,0.08)] backdrop-blur-xl transition hover:-translate-y-0.5 hover:shadow-[0_20px_55px_rgba(86,63,52,0.12)]"
-          >
-            <div className="flex items-center justify-between gap-3 border-b border-stone-100 bg-linear-to-r from-emerald-50/80 via-white to-violet-50/70 px-5 py-4">
-              <div className="flex items-center gap-3">
-                <span className="grid size-10 place-items-center rounded-2xl bg-white text-xl shadow-sm">🐶</span>
+      <div className="hidden grid-cols-[1.1fr_1fr_1fr_0.9fr_1.2fr] gap-4 bg-slate-50 px-5 py-3 text-xs font-bold uppercase tracking-wide text-slate-500 md:grid">
+        <span>강아지</span>
+        <span>감정</span>
+        <span>욕구</span>
+        <span>피드백</span>
+        <span>분석 시각</span>
+      </div>
+
+      <div className="divide-y divide-slate-200">
+        {rows.map((row) => {
+          const emotion = row.result?.state?.emotion ?? "분석 결과";
+          const desire = row.result?.state?.desire ?? "-";
+          const feedback = row.feedback ? feedbackLabel[row.feedback] ?? row.feedback : "없음";
+          const tone = row.feedback ? feedbackTone[row.feedback] ?? "bg-slate-100 text-slate-600" : "bg-slate-100 text-slate-600";
+
+          return (
+            <article key={row.id} className="px-5 py-4">
+              <div className="grid gap-3 md:grid-cols-[1.1fr_1fr_1fr_0.9fr_1.2fr] md:items-center md:gap-4">
                 <div>
-                  <p className="text-sm font-black text-stone-800">{row.dog?.name ?? "등록되지 않은 강아지"}</p>
-                  <p className="mt-0.5 text-[10px] font-bold text-stone-400">
-                    {new Date(row.createdAt).toLocaleString("ko-KR")}
+                  <p className="text-sm font-semibold text-slate-800">
+                    {row.dog?.name ?? "등록되지 않은 강아지"}
                   </p>
+                  {row.result?.dogSpeech && (
+                    <p className="mt-1 line-clamp-1 text-xs text-slate-400">“{row.result.dogSpeech}”</p>
+                  )}
                 </div>
-              </div>
-              <span className="rounded-full bg-white px-2.5 py-1 text-[10px] font-black text-stone-400 shadow-sm">
-                {feedback}
-              </span>
-            </div>
 
-            <div className="p-5">
-              <div className="flex flex-wrap gap-2">
-                <span className="rounded-full bg-orange-50 px-3 py-1.5 text-xs font-black text-orange-700">
-                  {emotion}
-                </span>
-                {desire && (
-                  <span className="rounded-full bg-violet-50 px-3 py-1.5 text-xs font-black text-violet-700">
+                <div>
+                  <span className="md:hidden text-[11px] font-semibold text-slate-400">감정 · </span>
+                  <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">
+                    {emotion}
+                  </span>
+                </div>
+
+                <div>
+                  <span className="md:hidden text-[11px] font-semibold text-slate-400">욕구 · </span>
+                  <span className="rounded-full bg-violet-100 px-2.5 py-1 text-xs font-semibold text-violet-700">
                     {desire}
                   </span>
-                )}
-              </div>
+                </div>
 
-              <blockquote className="mt-4 text-lg font-black leading-7 tracking-tight text-stone-800">
-                {row.result?.dogSpeech ? "“" + row.result.dogSpeech + "”" : "분석 내용을 확인해보세요."}
-              </blockquote>
+                <div>
+                  <span className="md:hidden text-[11px] font-semibold text-slate-400">피드백 · </span>
+                  <span className={"rounded-full px-2.5 py-1 text-xs font-semibold " + tone}>
+                    {feedback}
+                  </span>
+                </div>
 
-              <div className="mt-5 flex items-center gap-2 text-xs font-black text-stone-300 transition group-hover:text-orange-500">
-                <span>분석 기록</span>
-                <span>→</span>
+                <p className="text-xs text-slate-500">
+                  {new Date(row.createdAt).toLocaleString("ko-KR")}
+                </p>
               </div>
-            </div>
-          </article>
-        );
-      })}
+            </article>
+          );
+        })}
+      </div>
     </div>
   );
 }
