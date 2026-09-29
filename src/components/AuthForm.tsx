@@ -37,7 +37,7 @@ export function AuthForm({ mode, alternate }: { mode: "login" | "register"; alte
   return (
     <main className="flex min-h-screen items-center justify-center p-4 md:p-8">
       <div className="grid w-full max-w-5xl overflow-hidden rounded-[40px] border border-white/90 bg-white/70 shadow-[0_30px_90px_rgba(86,63,52,0.14)] backdrop-blur-xl md:grid-cols-[0.95fr_1.05fr]">
-        <section className="relative hidden overflow-hidden bg-gradient-to-br from-orange-400 via-rose-400 to-violet-500 p-10 text-white md:flex md:min-h-[590px] md:flex-col">
+        <section className="relative hidden overflow-hidden bg-linear-to-br from-orange-400 via-rose-400 to-violet-500 p-10 text-white md:flex md:min-h-[590px] md:flex-col">
           <div className="absolute -right-24 -top-20 size-72 rounded-full bg-white/15 blur-2xl" />
           <div className="absolute -bottom-24 -left-20 size-72 rounded-full bg-yellow-200/20 blur-2xl" />
 
@@ -71,7 +71,7 @@ export function AuthForm({ mode, alternate }: { mode: "login" | "register"; alte
           <form onSubmit={onSubmit} className="mx-auto w-full max-w-sm">
             <div className="mb-8 md:hidden">
               <div className="flex items-center gap-2">
-                <span className="grid size-10 place-items-center rounded-2xl bg-gradient-to-br from-orange-400 to-rose-500 text-xl text-white">🐾</span>
+                <span className="grid size-10 place-items-center rounded-2xl bg-linear-to-br from-orange-400 to-rose-500 text-xl text-white">🐾</span>
                 <span className="font-black">Poppy</span>
               </div>
             </div>
@@ -123,7 +123,7 @@ export function AuthForm({ mode, alternate }: { mode: "login" | "register"; alte
 
             <button
               disabled={loading}
-              className="mt-6 w-full rounded-2xl bg-gradient-to-r from-orange-500 to-rose-500 p-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(244,103,81,0.26)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-50"
+              className="mt-6 w-full rounded-2xl bg-linear-to-r from-orange-500 to-rose-500 p-3.5 text-sm font-black text-white shadow-[0_12px_28px_rgba(244,103,81,0.26)] transition hover:-translate-y-0.5 disabled:translate-y-0 disabled:opacity-50"
             >
               {loading ? "처리 중..." : isLogin ? "로그인" : "가입하고 시작"}
             </button>
