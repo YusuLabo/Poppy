@@ -2,12 +2,13 @@ import { AnalysisList } from "@/components/AnalysisList";
 
 export default function AnalysesPage() {
   return (
-    <section>
-      <div className="mb-6">
-        <span className="inline-flex rounded-full bg-emerald-100 px-3 py-1.5 text-xs font-black text-emerald-700">◷ HISTORY</span>
-        <h1 className="mt-3 text-3xl font-black tracking-[-0.035em] text-stone-900 md:text-4xl">분석 기록</h1>
-        <p className="mt-2 text-sm font-medium text-stone-500">지금까지 살펴본 강아지의 상태와 한마디를 시간순으로 모아봤어요.</p>
-      </div>
+    <section className="space-y-5">
+      <header className="rounded-xl bg-white px-6 py-6 shadow-sm md:px-8">
+        <h1 className="text-2xl font-bold text-slate-800 md:text-3xl">분석 기록</h1>
+        <p className="mt-2 text-sm leading-6 text-slate-500">
+          지금까지 저장된 분석 결과와 피드백을 확인합니다.
+        </p>
+      </header>
       <AnalysisList />
     </section>
   );
