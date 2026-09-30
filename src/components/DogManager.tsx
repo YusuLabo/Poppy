@@ -52,31 +52,33 @@ export function DogManager() {
   }, []);
 
   async function addDog(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    const form = new FormData(e.currentTarget);
-    const response = await fetch("/api/dogs", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        name: form.get("name"),
-        birthDate: form.get("birthDate") || null,
-        breedKey: form.get("breedKey") || null,
-        sex: form.get("sex"),
-        neutered: form.get("neutered"),
-        personality: form.get("personality") || null,
-      }),
-    });
+  const formElement = e.currentTarget;
+  const form = new FormData(formElement);
 
-    if (!response.ok) {
-      setError((await response.json()).error ?? "실패");
-      return;
-    }
+  const response = await fetch("/api/dogs", {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      name: form.get("name"),
+      birthDate: form.get("birthDate") || null,
+      breedKey: form.get("breedKey") || null,
+      sex: form.get("sex"),
+      neutered: form.get("neutered"),
+      personality: form.get("personality") || null,
+    }),
+  });
 
-    e.currentTarget.reset();
-    await load();
+  if (!response.ok) {
+    setError((await response.json()).error ?? "실패");
+    return;
   }
+
+  formElement.reset();
+  await load();
+}
 
   async function addTrait(dogId: string, text: string, source: "USER" | "PRESET" = "USER") {
     if (!text.trim()) return;
